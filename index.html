@@ -3,19 +3,104 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>멀티미디</title>
+    <link rel="shortcut icon" type="image⁄x-icon" href="./lgtwins.png">
+    <title>야구 개막하게 해 주세요</title>
+    <style>
+        aside,section {
+            display: block;
+            float: left;
+        }
+        .li {
+            line-height: 1.1em;
+            color: lightslategrey;
+        }
+        #category {
+            float: left;
+            margin: 0 0 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #category_title {
+            width: 100%;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 5px;
+            box-sizing: border-box;
+            margin-bottom: 7px;
+            color: darkslategrey;
+            border-bottom: 1px solid lightslategrey;
+        }
+        #content_title {
+            letter-spacing: 1px;
+            padding: 3px;
+            color: darkslategrey;
+            border-bottom: 1px solid lightslategrey;
+        }
+        #content_list {
+            width: 200px;
+        }
+        #sidebar {
+            position: relative;
+            float: left;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>git 연습해보기 수정</h1>
-    <p>practice branch</p>
-    <p>가로 320, 세로 240 크기의 동영상을 출력합니다.<br>
-        동영상의 위치는 http://www.w3schools.com/tags/movie.mp4입니다.<br>
-        <video width="320px" height="240px" controls>
-            <source src="http://www.w3schools.com/tags/movie.mp4" type="video/mp4">
-            <source src="http://www.w3schools.com/tags/movie.ogg" type="video/ogg">
-        </video>
-    </p>
+    <header>
+        <div style="background-color: lightskyblue; padding: 20px 20px;">
+            <h1 style="text-align: center">
+                <a style="color: darkslategrey; text-decoration: none" href="./index.html">야구 개막하게 해 주세요</a>
+            </h1>
+        </div>
+        <div style="height: 50px"></div>
+    </header>
+    <div style="position:relative; float: left;">
+        <div style="float: left;">
+        <aside id="sidebar">
+            <div id="category">
+                <div id="category_title">Category</div>
+                <ul id="category_list">
+                    <li>
+                        기술공간
+                        <ul>
+                            <li>React</li>
+                            <li>Spring</li>
+                            <li>C/C++</li>
+                        </ul>
+                    </li>
+                    <li>여행공간
+                        <ul>
+                            <li>스페인</li>
+                            <li>홍콩</li>
+                            <li>일본</li>
+                        </ul>
+                    </li>
+                    <li>일상공간
+                        <ul>
+                            <li>맛집 소개</li>
+                            <li>책</li>
+                            <li>유용한 정보들</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <input type="text" name="search" value="검색 내용을 입력하세요.">
+                <button type="submit">검색</button>
+            </div>
+        </aside>
+        </div>
+    <article style="padding-left: 10px;position:relative; float: left;">
+            <div>
+                <h2>
+                    <div class="content_title">최근 게시물</div>
+                </h2>
+            </div>
+        </article>
+</div>
 </body>
 
 </html>
