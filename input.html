@@ -114,42 +114,49 @@
         <article style="padding-left: 30px;position:relative; float: left;">
             <div>
                 <h2>
-                    <div class="content_title">최근 게시물
-                        <div style="position:relative; float: right;padding-left: 120px;padding: 10px">
-                            <a href="./input.html">
-                                <img src="./plus.png" width="35px" height="28px">
-                            </a>
-                        </div>
-                    </div>
+                    <div class="content_title">게시물 작성</div>
                 </h2>
-                <div style="padding-top: 10px;">
-                    <img src="./ww.jpg" width="150" height="100">
-                    <div style="position:relative; float:right; padding: 0px 10px 10px; width: 500px;">
-                        <h4>프로야구의 계절이 돌아왔습니다.</h4>
-                        <p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
+            </div>
+            <div>
+                <span>게시판 선택</span>
+                <span style="padding-left: 50px;">
+                    <select name="category" style="width: 300px; height: 35px;">
+                        <option value="" selected disabled hidden>선택해주세요.</option>
+                        <option value="1_1">React</option>
+                        <option value="1_2">Spring</option>
+                        <option value="1_3">C/C++</option>
+                        <option value="2_1">스페인</option>
+                        <option value="2_2">홍콩</option>
+                        <option value="2_3">일본</option>
+                        <option value="3_1">맛집 소개</option>
+                        <option value="3_2">책</option>
+                        <option value="3_3">유용한 정보들</option>
+                    </select>
+                </span>
+            </div>
+            <div style="padding-top: 15px">
+                <span>제목</span>
+                <span style="padding-left: 103px;">
+                    <input type="text" value="내용을 입력해주세요." style="width: 500px; height: 35px;">
+                </span>
+            </div>
+            <div style="padding-top: 15px">
+                <div>
+                    <div>
+                    <span style="padding-right: 565px">내용</span>
+                    <span>사진 추가</span>
+                    <span style="padding-top: 3px">
+                        <img src="./photo.png" width="25px" height="25px">
+                    </span>
+                </div>
+                    <div style="padding-top: 5px">
+                        <textarea name="content" cols="150" row="50" placeholder="내용을 입력해주세요."
+                            style="width: 700px; height:300px"></textarea>
                     </div>
                 </div>
-                <div style="padding-top: 10px;">
-                    <img src="./ww.jpg" width="150" height="100">
-                    <div style="position:relative; float:right; padding: 0px 10px 10px; width: 500px;">
-                        <h4>프로야구의 계절이 돌아왔습니다.</h4>
-                        <p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-                    </div>
-                </div>
-                <div style="padding-top: 10px;">
-                    <img src="./ww.jpg" width="150" height="100">
-                    <div style="position:relative; float:right; padding: 0px 10px 10px; width: 500px;">
-                        <h4>프로야구의 계절이 돌아왔습니다.</h4>
-                        <p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-                    </div>
-                </div>
-                <div style="padding-top: 10px;">
-                    <img src="./ww.jpg" width="150" height="100">
-                    <div style="position:relative; float:right; padding: 0px 10px 10px; width: 500px;">
-                        <h4>프로야구의 계절이 돌아왔습니다.</h4>
-                        <p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-                    </div>
-                </div>
+            </div>
+            <div>
+                <button type="submit">등록</button>
             </div>
         </article>
     </div>
