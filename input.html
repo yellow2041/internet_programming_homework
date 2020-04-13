@@ -57,6 +57,28 @@
             float: left;
             box-sizing: border-box;
         }
+        #submitBtn {
+            border-radius: 6px;
+            background-color: steelblue;
+            font-size: 20px;
+            padding: 15px 30px;
+            margin-bottom: 10px;
+            color:lightblue;
+        }
+        #submitBtn:hover {
+            background-color:lightblue;
+            color: steelblue;
+        }
+        #searchBtn {
+            border-radius: 4px;
+            background-color: steelblue;
+            font-size: 15px;
+            padding: 5px 5px;
+            color:lightblue;
+        }
+        #searchBtn:hover {
+            box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+        }
     </style>
 </head>
 
@@ -107,7 +129,7 @@
                 </div>
                 <div>
                     <input type="text" name="search" value="검색 내용을 입력하세요.">
-                    <button type="submit">검색</button>
+                    <button id="searchBtn" type="submit">검색</button>
                 </div>
             </aside>
         </div>
@@ -155,8 +177,8 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <button type="submit">등록</button>
+            <div style="float: right">
+                <button id="submitBtn" type="submit">등록</button>
             </div>
         </article>
     </div>
