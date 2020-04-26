@@ -54,7 +54,7 @@
                     </ul>
                 </div>
                 <div>
-                    <input type="text" name="search" value="검색 내용을 입력하세요.">
+                    <input id="category_search" type="text" name="search" value="검색 내용을 입력하세요.">
                     <button id="searchBtn" type="submit">검색</button>
                 </div>
             </aside>
@@ -94,7 +94,8 @@
                     <span style="padding-right: 565px">내용</span>
                     <span>사진 추가</span>
                     <span style="padding-top: 3px">
-                        <img src="./images/photo.png" width="25px" height="25px">
+                        <input id="inputBtn" type="image" src="./images/photo.png" alt="submit" width="25px" height="25px" onclick="onclick=document.all.file.click()">
+                        <input type="file" style="display: none"/>
                     </span>
                 </div>
                     <div style="padding-top: 5px">
