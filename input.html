@@ -6,6 +6,28 @@
     <link rel="stylesheet" type="text/css" href="./input_styles.css"/>
     <link rel="shortcut icon" type="image⁄x-icon" href="./images/lgtwins.png">
     <title>야구 개막하게 해 주세요</title>
+    <script>
+        function showData(){
+            var obj=document.getElementById("selectCategory");
+            var str="";
+            str="선택 게시판: "+obj.value+"\n";
+            obj=document.getElementById("title");
+            str+="제목: "+obj.value+"\n";
+            obj=document.getElementById("file");
+            str+="사진: "
+            var files=obj.files;
+            for(var i=0;i<files.length;i++){
+                if(files.length-1==i)
+                    str+=files[i].name+"\n";
+                else
+                    str+=files[i].name+", "
+            }
+            obj=document.getElementById("content");
+            str+="내용: "+obj.value;
+
+            alert(str);
+        }
+    </script>
 </head>
 
 <body>
@@ -68,44 +90,43 @@
             <div>
                 <span>게시판 선택</span>
                 <span style="padding-left: 50px;">
-                    <select name="category" style="width: 300px; height: 35px;">
+                    <select name="category" id="selectCategory" style="width: 300px; height: 35px;">
                         <option value="" selected disabled hidden>선택해주세요.</option>
-                        <option value="1_1">React</option>
-                        <option value="1_2">Spring</option>
-                        <option value="1_3">C/C++</option>
-                        <option value="2_1">스페인</option>
-                        <option value="2_2">홍콩</option>
-                        <option value="2_3">일본</option>
-                        <option value="3_1">맛집 소개</option>
-                        <option value="3_2">책</option>
-                        <option value="3_3">유용한 정보들</option>
+                        <option value="React">React</option>
+                        <option value="Spring">Spring</option>
+                        <option value="C/C++">C/C++</option>
+                        <option value="스페인">스페인</option>
+                        <option value="홍콩">홍콩</option>
+                        <option value="일본">일본</option>
+                        <option value="맛집 소개">맛집 소개</option>
+                        <option value="책">책</option>
+                        <option value="유용한 정보들">유용한 정보들</option>
                     </select>
                 </span>
             </div>
             <div style="padding-top: 15px">
                 <span>제목</span>
-                <span style="padding-left: 103px;">
-                    <input type="text" value="내용을 입력해주세요." style="width: 500px; height: 35px;">
+                <span style="padding-left: 93px;">
+                    <input type="text" id="title" style="width: 500px; height: 35px;">
                 </span>
             </div>
             <div style="padding-top: 15px">
                 <div>
                     <div>
                     <span style="padding-right: 565px">내용</span>
-                    <span>사진 추가</span>
                     <span style="padding-top: 3px">
-                        <input id="inputBtn" type="image" src="./images/photo.png" alt="submit" width="25px" height="25px" onclick="onclick=document.all.file.click()">
-                        <input type="file" style="display: none"/>
+                        <input type="file" name="file" id="file" style="display: none" multiple/>
+                        <input id="inputBtn" type="image" src="./images/photo.png" alt="submit" width="25px" height="25px" onclick="onclick=document.all.file.click()" >
                     </span>
                 </div>
                     <div style="padding-top: 5px">
-                        <textarea name="content" cols="150" row="50" placeholder="내용을 입력해주세요."
-                            style="width: 700px; height:300px"></textarea>
+                        <textarea id="content" name="content" cols="150" row="50" placeholder="내용을 입력해주세요."
+                            style="width: 680px; height:300px"></textarea>
                     </div>
                 </div>
             </div>
             <div style="float: right">
-                <button id="submitBtn" type="submit">등록</button>
+                <button id="submitBtn" type="submit" onclick="return showData()">등록</button>
             </div>
         </article>
     </div>

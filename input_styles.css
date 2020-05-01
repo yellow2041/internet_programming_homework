@@ -89,6 +89,7 @@ section {
 }
 #inputBtn {
     display: inline;
+    float: right;
 }
 ul.category_list {
     padding-left: 20px;
