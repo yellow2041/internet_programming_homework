@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
-<%
-	HttpSession session = request.getSession(false);
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +7,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./index_styles.css" />
 <link rel="shortcut icon" type="image⁄x-icon" href="./images/lgtwins.png" />
-<title>야구 개막하게 해 주세요</title>
+<title>Sign in</title>
 </head>
 <body>
 	<header>
@@ -19,18 +16,8 @@
 				<a id="main_title" href="./index.jsp">아무말 대잔치</a>
 			</h1>
 			<div style="float: right;">
-				<%
-					if(session.getAttribute("login.id") == null) {
-				%>
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./signUp.jsp'">Sign up</button>
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./addUser.jsp'">Sign in</button>
-				<%
-					}else{
-				%>
-				<h3 class="align-bottom">안녕하세요! &nbsp<%=(String)session.getAttribute("login.name") %>님 </h3>
-				<%
-					}
-				%>
+				<button type="button" class="btn btn-outline-secondary">Sign up</button>
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./addUser.jsp">Sign in</button>
 			</div>
 		</div>
 
@@ -79,44 +66,23 @@
 				</div>
 			</aside>
 		</nav>
-		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 680px; float: left;">
-			<h2>
-				<div class="content_title">
-					최근 게시물
-					<div style="position: relative; float: right; padding-left: 120px; padding: 10px">
-						<a href="./input.html"> <img src="./images/plus.png" width="35px" height="28px">
-						</a>
+		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 300px; float: left;">
+			<h2>로그인</h2>
+			<form name="f1" method="post" action="signUpDo.jsp">
+				<div class="form-row">
+					<div class="col-md-12 mb-3">
+						<label for="validationDefault01">ID</label> <input type="text" class="form-control" id="id" name="id" value="" required>
 					</div>
 				</div>
-			</h2>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
+				<div class="form-row">
+					<div class="col-md-12 mb-3">
+						<label for="validationDefault03">Password</label> <input type="password" class="form-control" id="pwd" name="pwd" required>
+					</div>
 				</div>
-			</div>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
+				<div class="col text-center">
+					<button class="btn btn-info btn-lg" type="submit" style="">로그인</button>
 				</div>
-			</div>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
+			</form>
 		</article>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
