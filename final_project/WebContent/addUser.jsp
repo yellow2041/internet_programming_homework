@@ -16,8 +16,8 @@
 				<a id="main_title" href="./index.jsp">아무말 대잔치</a>
 			</h1>
 			<div style="float: right;">
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./signIn.jsp">Sign in</button>
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./addUser.jsp">Sign up</button>
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./addUser.jsp">Sign in</button>
 			</div>
 		</div>
 
@@ -67,7 +67,7 @@
 			</aside>
 		</nav>
 		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 680px; float: left;">
-			<h2>회원가입</h2>
+			<h2>Sign up</h2>
 			<form name="f1" method="post" action="userSaveDo.jsp">
 				<div class="form-row">
 					<div class="col-md-6 mb-3">
@@ -91,7 +91,7 @@
 					</div>
 				</div>
 				<div class="col text-center">
-					<button class="btn btn-info btn-lg" type="submit" style="">회원가입</button>
+					<button class="btn btn-info btn-lg" type="submit" style="">Sign up</button>
 				</div>
 			</form>
 		</article>

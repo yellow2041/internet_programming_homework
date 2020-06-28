@@ -1,23 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*" session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
 <%
 	HttpSession session = request.getSession(false);
-
-	Class.forName("org.mariadb.jdbc.Driver");
-	String DB_URL = "jdbc:mariadb://localhost:3307/snsboard?useSSL=false";
-	String DB_USER = "admin";
-	String DB_PASSWORD = "1234";
-
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	try {
-		con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-
-		String sql = "SELECT * FROM post LIMIT 0,3";
-
-		pstmt = con.prepareStatement(sql);
-
-		rs = pstmt.executeQuery();
 %>
 <!DOCTYPE html>
 <html>
@@ -40,8 +23,9 @@
 			<div style="float: right;">
 				<%
 					if (session == null || session.getAttribute("login.id") == null) {
+						response.sendRedirect("index.jsp");
 				%>
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./signIn.jsp'">Sign in</button>
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./signInp.jsp'">Sign in</button>
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./addUser.jsp'">Sign up</button>
 				<%
 					} else {
@@ -104,68 +88,50 @@
 			</aside>
 		</nav>
 		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 750px; float: left;">
-			<h2>
-				<div class="content_title">
-					최근 게시물
-					<div style="position: relative; float: right; padding-left: 120px; padding: 10px">
-						<%
-							if (session == null || session.getAttribute("login.id") == null) {
-						%>
-						<a href="./signIn.jsp"> <img src="./images/plus.png" width="35px" height="28px"></a>
-						<%
-							} else {
-						%>
-						<a href="./input.jsp"> <img src="./images/plus.png" width="35px" height="28px"></a>
-						<%
-							}
-						%>
+			<form action="postAddDo.jsp" method="post" enctype="multipart/form-data">
+				<div>
+					<h2>
+						<div class="content_title">게시물 작성</div>
+					</h2>
+				</div>
+				<div>
+					<span>게시판 선택</span> <span style="padding-left: 50px;"> 
+					<select name="category" class="form-control" id="exampleFormControlSelect1" style="width: 300px; display:inline;">
+							<option value="" selected disabled hidden>선택해주세요.</option>
+							<option value="React">React</option>
+							<option value="Spring">Spring</option>
+							<option value="C/C++">C/C++</option>
+							<option value="스페인">스페인</option>
+							<option value="홍콩">홍콩</option>
+							<option value="일본">일본</option>
+							<option value="맛집 소개">맛집 소개</option>
+							<option value="책">책</option>
+							<option value="유용한 정보들">유용한 정보들</option>
+					</select>
+					</span>
+				</div>
+				<div style="padding-top: 15px">
+					<span>제목</span> <span style="padding-left: 93px;"> 
+					<input type="text" class="form-control" id="exampleFormControlInput1" name="title" style="width: 500px; display:inline;">
+					</span>
+				</div>
+				<div style="padding-top: 15px">
+					<div>
+						<div>
+							<span style="padding-right: 3px">내용 <span style="float: right; margin-bottom: 3px"> <input type="file" class="btn btn-info btn-sm pull-right" name="fileName" id="file" accept="image/*" multiple />
+							</span>
+							</span>
+						</div>
+						<div style="padding-top: 5px">
+							<textarea class="form-control" id="exampleFormControlTextarea1" name="content" row="50" placeholder="내용을 입력해주세요." style="height: 300px"></textarea>
+						</div>
 					</div>
 				</div>
-			</h2>
-			<%
-				while (rs.next()) {
-			%>
-			<div style="padding-top: 10px;">
-			<%if(rs.getString("imageFile")!=null){ %>
-				<img src="./upload/<%=rs.getString("imageFile")%>" width="150" height="100">
-				<%
-				}
-				%>
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4><%=rs.getString("title")%></h4>
-					<p><%=rs.getString("contents")%></p>
+
+				<div style="float: right;">
+					<button class="btn btn-info btn-lg" style="margin-top:5px" type="submit">등 록</button>
 				</div>
-			</div>
-			<%
-				}
-					rs.close();
-					pstmt.close();
-					con.close();
-				} catch (SQLException e) {
-					out.println(e);
-				}
-			%>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
+			</form>
 		</article>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

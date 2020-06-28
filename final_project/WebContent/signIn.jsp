@@ -16,8 +16,8 @@
 				<a id="main_title" href="./index.jsp">아무말 대잔치</a>
 			</h1>
 			<div style="float: right;">
-				<button type="button" class="btn btn-outline-secondary">Sign up</button>
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./addUser.jsp">Sign in</button>
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./signIn.jsp">Sign in</button>
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./addUser.jsp">Sign up</button>
 			</div>
 		</div>
 
@@ -67,8 +67,8 @@
 			</aside>
 		</nav>
 		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 300px; float: left;">
-			<h2>로그인</h2>
-			<form name="f1" method="post" action="signUpDo.jsp">
+			<h2>Sign in</h2>
+			<form name="f1" method="post" action="signInDo.jsp">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
 						<label for="validationDefault01">ID</label> <input type="text" class="form-control" id="id" name="id" value="" required>
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 				<div class="col text-center">
-					<button class="btn btn-info btn-lg" type="submit" style="">로그인</button>
+					<button class="btn btn-info btn-lg" type="submit">Sign in</button>
 				</div>
 			</form>
 		</article>
