@@ -13,7 +13,7 @@
 	try {
 		con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-		String sql = "SELECT * FROM post LIMIT 0,3";
+		String sql = "SELECT * FROM post ORDER BY idx desc LIMIT 10";
 
 		pstmt = con.prepareStatement(sql);
 
@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./index_styles.css" />
 <link rel="shortcut icon" type="image⁄x-icon" href="./images/lgtwins.png" />
-<title>야구 개막하게 해 주세요</title>
+<title>main</title>
 </head>
 <body>
 	<header>
@@ -57,84 +57,115 @@
 				%>
 			</div>
 		</div>
-
-
 		<div style="height: 20px"></div>
 	</header>
-	<div style="position: relative; float: left;">
-		<nav style="float: left;">
+	<div style="position: relative; float: left; width: 250px">
+		<nav style="float: left; width: 100%; padding-right: 20px">
 			<aside id="sidebar">
 				<div id="category">
 					<div>
-						<div id="category_title">
-							Category
-							<div style="position: relative; float: right; padding-left: 120px">
-								<img src="./images/plus.png" width="25px" height="20px">
-							</div>
-						</div>
+						<div id="category_title">Category</div>
 					</div>
 					<ul class="category_list">
 						<li class="big_list">기술공간
 							<ul class="small_list">
-								<li>React</li>
-								<li>Spring</li>
-								<li>C/C++</li>
+								<li><a href="categoryView.jsp?category=React" style="color: black; text-decoration: none">React</a></li>
+								<li><a href="categoryView.jsp?category=Spring" style="color: black; text-decoration: none">Spring</a></li>
 							</ul>
 						</li>
 						<li class="big_list">여행공간
 							<ul class="small_list">
-								<li>스페인</li>
-								<li>홍콩</li>
-								<li>일본</li>
+								<li><a href="categoryView.jsp?category=스페인" style="color: black; text-decoration: none">스페인</a></li>
+								<li><a href="categoryView.jsp?category=홍콩" style="color: black; text-decoration: none">홍콩</a></li>
+								<li><a href="categoryView.jsp?category=일본" style="color: black; text-decoration: none">일본</a></li>
 							</ul>
 						</li>
 						<li class="big_list">일상공간
 							<ul class="small_list">
-								<li>맛집 소개</li>
-								<li>책</li>
-								<li>유용한 정보들</li>
+								<li><a href="categoryView.jsp?category=맛집 " style="color: black; text-decoration: none">맛집</a></li>
+								<li><a href="categoryView.jsp?category=정보" style="color: black; text-decoration: none">정보</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
-				<div>
-					<input id="category_search" type="text" name="search" value="검색 내용을 입력하세요.">
-					<button id="searchBtn" type="submit">검색</button>
-				</div>
+				<form class="form-row" action="searchResult.jsp" method="post">
+					<div class="form-row" style="margin-bottom: 20px">
+						<input class="form-control" style="width: 60%; margin-left: 20px" type="text" name="search" placeholder="게시글 검색">
+						<div class="col-auto">
+							<button class="btn btn-info" type="submit">검색</button>
+						</div>
+					</div>
+				</form>
 			</aside>
 		</nav>
-		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 750px; float: left;">
+		<article style="margin-bottom: 30px; padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 750px; float: left;">
 			<h2>
-				<div class="content_title">
-					최근 게시물
-					<div style="position: relative; float: right; padding-left: 120px; padding: 10px">
-						<%
-							if (session == null || session.getAttribute("login.id") == null) {
-						%>
-						<a href="./signIn.jsp"> <img src="./images/plus.png" width="35px" height="28px"></a>
-						<%
-							} else {
-						%>
-						<a href="./input.jsp"> <img src="./images/plus.png" width="35px" height="28px"></a>
-						<%
-							}
-						%>
-					</div>
+				최근 게시물
+				<div style="position: relative; float: right; padding-left: 120px; padding: 0px">
+					<%
+						if (session == null || session.getAttribute("login.id") == null) {
+					%>
+					<a href="./signIn.jsp"> <img src="./images/plus.png" width="35px" height="28px"></a>
+					<%
+						} else {
+					%>
+					<a href="./input.jsp"> <img src="./images/plus.png" width="35px" height="28px"></a>
+					<%
+						}
+					%>
 				</div>
 			</h2>
 			<%
 				while (rs.next()) {
 			%>
-			<div style="padding-top: 10px;">
-			<%if(rs.getString("imageFile")!=null){ %>
-				<img src="./upload/<%=rs.getString("imageFile")%>" width="150" height="100">
+			<div style="padding-top: 20px;">
 				<%
-				}
+					if (rs.getString("imageFile") != null) {
 				%>
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4><%=rs.getString("title")%></h4>
-					<p><%=rs.getString("contents")%></p>
+				<a href="postView.jsp?idx=<%=rs.getInt("idx")%>"> <img src="./upload/<%=rs.getString("imageFile")%>" width="170" height="130" />
+				</a>
+				<div style="position: relative; float: right; padding: 0px 10px; width: 530px;">
+					<div class="form-row row justify-content-between">
+						<h4>
+							<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"><%=rs.getString("title")%></a>
+						</h4>
+						<div style="text-align: right; padding-top: 10px; color: gray;"><%=rs.getString("writer")%>&nbsp<%=rs.getString("dateTime").substring(0, 19)%></div>
+					</div>
+					<p>
+						<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"> <%
+ 	if (rs.getString("contents").length() > 100) {
+ %> <%=rs.getString("contents").substring(0, 100)%> <span style="color: gray">...더보기</span> <%
+ 	} else {
+ %> <%=rs.getString("contents")%>
+					<%
+						}
+					%></a></p>
 				</div>
+
+				<%
+					} else {
+				%>
+				<div style="position: relative; padding: 0px 10px; width: 720px;">
+					<div class="form-row row justify-content-between">
+						<h4>
+							<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"><%=rs.getString("title")%></a>
+						</h4>
+						<div style="text-align: right; padding-top: 10px; color: gray;"><%=rs.getString("writer")%>&nbsp<%=rs.getString("dateTime").substring(0, 19)%></div>
+					</div>
+					<p>
+						<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"> <%
+ 	if (rs.getString("contents").length() > 100) {
+ %> <%=rs.getString("contents").substring(0, 100)%> <span style="color: gray">...더보기</span> <%
+ 	} else {
+ %> <%=rs.getString("contents")%> <%
+ 	}
+ %>
+						</a>
+					</p>
+				</div>
+				<%
+					}
+				%>
 			</div>
 			<%
 				}
@@ -145,27 +176,6 @@
 					out.println(e);
 				}
 			%>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
-			<div style="padding-top: 10px;">
-				<img src="./images/ww.jpg" width="150" height="100">
-				<div style="position: relative; float: right; padding: 0px 10px 10px; width: 500px;">
-					<h4>프로야구의 계절이 돌아왔습니다.</h4>
-					<p>야구 개막 해주세요...코로나 언제 사라질까요ㅠㅠㅠ윌슨 보고싶습니다ㅠㅠ</p>
-				</div>
-			</div>
 		</article>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

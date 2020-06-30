@@ -34,7 +34,9 @@ HttpSession session = request.getSession(false);
 	    	String loginName=rs.getString("name");
 	    	String loginBirth=rs.getString("birth");
 	    	String loginPwd=rs.getString("pwd");
+	    	int loginIdx=rs.getInt("idx");
 	    	
+	    	session.setAttribute("login.idx", loginIdx);
 	    	session.setAttribute("login.id", loginId);
 	    	session.setAttribute("login.name", loginName);
 	    	session.setAttribute("login.birth", loginBirth);

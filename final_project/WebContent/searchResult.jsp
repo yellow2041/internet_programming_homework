@@ -1,4 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*" session="false"%>
+<%
+request.setCharacterEncoding("utf-8");
+
+	HttpSession session = request.getSession(false);
+
+	Class.forName("org.mariadb.jdbc.Driver");
+	String DB_URL = "jdbc:mariadb://localhost:3307/snsboard?useSSL=false";
+	String DB_USER = "admin";
+	String DB_PASSWORD = "1234";
+
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	String search=request.getParameter("search");
+	
+	try {
+		con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+
+		String sql = "SELECT * FROM post WHERE contents LIKE '%"+search+"%' OR title LIKE '%"+search+"%'";
+
+		pstmt = con.prepareStatement(sql);
+
+		rs = pstmt.executeQuery();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +32,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./index_styles.css" />
 <link rel="shortcut icon" type="image⁄x-icon" href="./images/lgtwins.png" />
-<title>Sign up</title>
+<title>검색 결과</title>
 </head>
 <body>
 	<header>
@@ -64,7 +89,7 @@
 						</li>
 						<li class="big_list">일상공간
 							<ul class="small_list">
-								<li><a href="categoryView.jsp?category=맛집 소개" style="color:black; text-decoration:none">맛집</a></li>
+								<li><a href="categoryView.jsp?category=맛집" style="color:black; text-decoration:none">맛집</a></li>
 								<li><a href="categoryView.jsp?category=정보" style="color:black; text-decoration:none">정보</a></li>
 							</ul>
 						</li>
@@ -80,34 +105,75 @@
 				</form>
 			</aside>
 		</nav>
-		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 680px; float: left;">
-			<h2>Sign up</h2>
-			<form name="f1" method="post" action="userSaveDo.jsp">
-				<div class="form-row">
-					<div class="col-md-6 mb-3">
-						<label for="validationDefault01">ID</label> <input type="text" class="form-control" id="id" name="id" value="" required>
+		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 750px; float: left;">
+			<h2>
+					검색 결과
+					
+			</h2>
+			<%
+				while (rs.next()) {
+			%>
+			<div style="padding-top: 20px;">
+				<%
+					if (rs.getString("imageFile") != null) {
+				%>
+				<a href="postView.jsp?idx=<%=rs.getInt("idx")%>"> <img src="./upload/<%=rs.getString("imageFile")%>" width="170" height="130" />
+				</a>
+				<div style="position: relative; float: right; padding: 0px 10px; width: 530px;">
+					<div class="form-row row justify-content-between">
+						<h4>
+							<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"><%=rs.getString("title")%></a>
+						</h4>
+						<div style="text-align: right; padding-top: 10px; color: gray;"><%=rs.getString("writer")%>&nbsp<%=rs.getString("dateTime").substring(0, 19)%></div>
 					</div>
-					<div class="col-md-6 mb-3">
-						<label for="validationDefault02">Name</label> <input type="text" class="form-control" id="name" name="name" value="" required>
-					</div>
+					<p>
+						<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"> <%
+ 	if (rs.getString("contents").length() > 100) {
+ %> <%=rs.getString("contents").substring(0, 100)%> <span style="color: gray">...더보기</span> <%
+ 	} else {
+ %> <%=rs.getString("contents")%></a>
+					</p>
+					<%
+						}
+					%>
 				</div>
-				<div class="form-row">
-					<div class="col-md-6 mb-3">
-						<label for="validationDefault03">Password</label> <input type="password" class="form-control" id="pwd" name="pwd" required>
+
+				<%
+					} else {
+				%>
+				<div style="position: relative; padding: 0px 10px; width: 720px;">
+					<div class="form-row row justify-content-between">
+						<h4>
+							<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"><%=rs.getString("title")%></a>
+						</h4>
+						<div style="text-align: right; padding-top: 10px; color: gray;"><%=rs.getString("writer")%>&nbsp<%=rs.getString("dateTime").substring(0, 19)%></div>
 					</div>
-					<div class="col-md-6 mb-3">
-						<label for="validationDefault03">Birthday</label> <input type="date" class="form-control" id="birth" name="birth" required>
-					</div>
+					<p>
+						<a href="postView.jsp?idx=<%=rs.getInt("idx")%>" style="color: black; text-decoration: none !important"> <%
+ 	if (rs.getString("contents").length() > 100) {
+ %> <%=rs.getString("contents").substring(0, 100)%> <span style="color: gray">...더보기</span> <%
+ 	} else {
+ %> <%=rs.getString("contents")%></a>
+					</p>
+					<%
+						}
+					%>
+					</a>
+					</p>
 				</div>
-				<div class="form-group">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="" id="agreePersonalData" required> <label class="form-check-label" for="invalidCheck2"> 개인정보 제공에 동의합니당. </label>
-					</div>
-				</div>
-				<div class="col text-center">
-					<button class="btn btn-info btn-lg" type="submit" style="">Sign up</button>
-				</div>
-			</form>
+				<%
+					}
+				%>
+			</div>
+			<%
+				}
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (SQLException e) {
+					out.println(e);
+				}
+			%>
 		</article>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

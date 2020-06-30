@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./index_styles.css" />
 <link rel="shortcut icon" type="image⁄x-icon" href="./images/lgtwins.png" />
-<title>야구 개막하게 해 주세요</title>
+<title>게시글 작성</title>
 </head>
 <body>
 	<header>
@@ -41,50 +41,47 @@
 				%>
 			</div>
 		</div>
-
-
 		<div style="height: 20px"></div>
 	</header>
-	<div style="position: relative; float: left;">
-		<nav style="float: left;">
+	<div style="position: relative; float: left;width:250px">
+		<nav style="float: left; width: 100%; padding-right: 20px">
 			<aside id="sidebar">
 				<div id="category">
 					<div>
 						<div id="category_title">
 							Category
-							<div style="position: relative; float: right; padding-left: 120px">
-								<img src="./images/plus.png" width="25px" height="20px">
-							</div>
 						</div>
 					</div>
 					<ul class="category_list">
 						<li class="big_list">기술공간
 							<ul class="small_list">
-								<li>React</li>
-								<li>Spring</li>
-								<li>C/C++</li>
+								<li><a href="categoryView.jsp?category=React" style="color:black; text-decoration:none">React</a></li>
+								<li><a href="categoryView.jsp?category=Spring" style="color:black; text-decoration:none">Spring</a></li>
 							</ul>
 						</li>
 						<li class="big_list">여행공간
 							<ul class="small_list">
-								<li>스페인</li>
-								<li>홍콩</li>
-								<li>일본</li>
+								<li><a href="categoryView.jsp?category=스페인" style="color:black; text-decoration:none">스페인</a></li>
+								<li><a href="categoryView.jsp?category=홍콩" style="color:black; text-decoration:none">홍콩</a></li>
+								<li><a href="categoryView.jsp?category=일본" style="color:black; text-decoration:none">일본</a></li>
 							</ul>
 						</li>
 						<li class="big_list">일상공간
 							<ul class="small_list">
-								<li>맛집 소개</li>
-								<li>책</li>
-								<li>유용한 정보들</li>
+								<li><a href="categoryView.jsp?category=맛집" style="color:black; text-decoration:none">맛집</a></li>
+								<li><a href="categoryView.jsp?category=정보" style="color:black; text-decoration:none">정보</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
-				<div>
-					<input id="category_search" type="text" name="search" value="검색 내용을 입력하세요.">
-					<button id="searchBtn" type="submit">검색</button>
+				<form class="form-row" action="searchResult.jsp" method="post">
+				<div class="form-row" style="margin-bottom:20px">
+					<input class="form-control" style="width: 60%; margin-left: 20px" type="text" name="search" placeholder="게시글 검색">
+					<div class="col-auto" >
+						<button class="btn btn-info" type="submit">검색</button>
+					</div>
 				</div>
+				</form>
 			</aside>
 		</nav>
 		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 750px; float: left;">
@@ -100,13 +97,11 @@
 							<option value="" selected disabled hidden>선택해주세요.</option>
 							<option value="React">React</option>
 							<option value="Spring">Spring</option>
-							<option value="C/C++">C/C++</option>
 							<option value="스페인">스페인</option>
 							<option value="홍콩">홍콩</option>
 							<option value="일본">일본</option>
-							<option value="맛집 소개">맛집 소개</option>
-							<option value="책">책</option>
-							<option value="유용한 정보들">유용한 정보들</option>
+							<option value="맛집">맛집</option>
+							<option value="정보">정보</option>
 					</select>
 					</span>
 				</div>
@@ -118,7 +113,8 @@
 				<div style="padding-top: 15px">
 					<div>
 						<div>
-							<span style="padding-right: 3px">내용 <span style="float: right; margin-bottom: 3px"> <input type="file" class="btn btn-info btn-sm pull-right" name="fileName" id="file" accept="image/*" multiple />
+							<span style="padding-right: 3px">내용 <span style="float: right; margin-bottom: 3px"> 
+							<input type="file" class="btn btn-info btn-sm pull-right" name="fileName" id="file" accept="image/*"/>
 							</span>
 							</span>
 						</div>

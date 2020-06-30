@@ -10,60 +10,73 @@
 <title>Sign in</title>
 </head>
 <body>
-	<header>
-		<div style="height: 20%; background-color: lightskyblue; padding: 50px 20px;">
-			<h1 style="width: 90%; text-align: center; display: inline-block;">
-				<a id="main_title" href="./index.jsp">아무말 대잔치</a>
-			</h1>
+	<div style="height: 20%; background-color: lightskyblue; padding: 50px 20px;">
+			<div>
+				<h1 style="width: 90%; text-align: center; display: inline-block;">
+					<a id="main_title" href="./index.jsp">아무말 대잔치</a>
+				</h1>
+			</div>
 			<div style="float: right;">
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./signIn.jsp">Sign in</button>
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href=./addUser.jsp">Sign up</button>
+				<%
+					if (session == null || session.getAttribute("login.id") == null) {
+				%>
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./signIn.jsp'">Sign in</button>
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./addUser.jsp'">Sign up</button>
+				<%
+					} else {
+				%>
+				<h4 class="align-bottom">
+					안녕하세요! &nbsp<%=(String) session.getAttribute("login.name")%>님
+					<form action="logout.jsp" style="display: inline">
+						<button type="submit" class="btn btn-outline-secondary btn-sm" style="margin-bottom: 7px">Logout</button>
+					</form>
+				</h4>
+				<%
+					}
+				%>
 			</div>
 		</div>
-
-
 		<div style="height: 20px"></div>
 	</header>
-	<div style="position: relative; float: left;">
-		<nav style="float: left;">
+	<div style="position: relative; float: left;width:250px">
+		<nav style="float: left; width: 100%; padding-right: 20px">
 			<aside id="sidebar">
 				<div id="category">
 					<div>
 						<div id="category_title">
 							Category
-							<div style="position: relative; float: right; padding-left: 120px">
-								<img src="./images/plus.png" width="25px" height="20px">
-							</div>
 						</div>
 					</div>
 					<ul class="category_list">
 						<li class="big_list">기술공간
 							<ul class="small_list">
-								<li>React</li>
-								<li>Spring</li>
-								<li>C/C++</li>
+								<li><a href="categoryView.jsp?category=React" style="color:black; text-decoration:none">React</a></li>
+								<li><a href="categoryView.jsp?category=Spring" style="color:black; text-decoration:none">Spring</a></li>
 							</ul>
 						</li>
 						<li class="big_list">여행공간
 							<ul class="small_list">
-								<li>스페인</li>
-								<li>홍콩</li>
-								<li>일본</li>
+								<li><a href="categoryView.jsp?category=스페인" style="color:black; text-decoration:none">스페인</a></li>
+								<li><a href="categoryView.jsp?category=홍콩" style="color:black; text-decoration:none">홍콩</a></li>
+								<li><a href="categoryView.jsp?category=일본" style="color:black; text-decoration:none">일본</a></li>
 							</ul>
 						</li>
 						<li class="big_list">일상공간
 							<ul class="small_list">
-								<li>맛집 소개</li>
-								<li>책</li>
-								<li>유용한 정보들</li>
+								<li><a href="categoryView.jsp?category=맛집" style="color:black; text-decoration:none">맛집</a></li>
+								<li><a href="categoryView.jsp?category=정보" style="color:black; text-decoration:none">정보</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
-				<div>
-					<input id="category_search" type="text" name="search" value="검색 내용을 입력하세요.">
-					<button id="searchBtn" type="submit">검색</button>
+				<form class="form-row" action="searchResult.jsp" method="post">
+				<div class="form-row" style="margin-bottom:20px">
+					<input class="form-control" style="width: 60%; margin-left: 20px" type="text" name="search" placeholder="게시글 검색">
+					<div class="col-auto" >
+						<button class="btn btn-info" type="submit">검색</button>
+					</div>
 				</div>
+				</form>
 			</aside>
 		</nav>
 		<article style="padding-left: 30px; position: absolute; top: 0px; left: 240px; width: 300px; float: left;">

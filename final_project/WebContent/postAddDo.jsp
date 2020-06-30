@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.oreilly.servlet.*, com.oreilly.servlet.multipart.*" import="java.sql.*, java.io.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.oreilly.servlet.*, com.oreilly.servlet.multipart.*" import="java.util.*,java.sql.*, java.io.*" session="false"%>
 <%
 request.setCharacterEncoding("utf-8");
+HttpSession session = request.getSession(false);
 
 Class.forName("org.mariadb.jdbc.Driver");
 String DB_URL = "jdbc:mariadb://localhost:3307/snsboard?useSSL=false";
@@ -21,12 +22,16 @@ try {
 	String category = multi.getParameter("category");
 	String title = multi.getParameter("title");
 	String contents = multi.getParameter("content");
+	int writerIdx=-1;
+	if(session!=null&&session.getAttribute("login.idx")!=null){
+		writerIdx=(int)session.getAttribute("login.idx");
+	}
 	
 	String imageFile = multi.getFilesystemName("fileName");
 
 	Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
 	
-	String sql = "INSERT INTO post(category, title, writer, imageFile, contents, datetime) VALUES(?,?,?,?,?,NOW())";
+	String sql = "INSERT INTO post(category, title, writer, imageFile, contents, datetime, writerIdx) VALUES(?,?,?,?,?,NOW(),?)";
 	
 	PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -35,6 +40,7 @@ try {
 	pstmt.setString(3,writer);
 	pstmt.setString(4,imageFile);
 	pstmt.setString(5,contents);
+	pstmt.setInt(6,writerIdx);
 
 	pstmt.executeQuery();
 

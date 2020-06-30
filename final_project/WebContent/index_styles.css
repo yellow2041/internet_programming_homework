@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Sunflower&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&family=Poor+Story&display=swap');
 
 body {
@@ -38,7 +37,6 @@ section {
 }
 
 #category_search{
-    height: 25px;
     margin-left: 15px;
 }
 
@@ -62,7 +60,7 @@ section {
 }
 
 #content_list {
-    width: 200px;
+    width: 150px;
 }
 #searchBtn {
     border-radius: 4px;
